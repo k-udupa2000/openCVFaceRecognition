@@ -1,0 +1,8 @@
+1. Store the files in a the stored Image folder.
+
+2. Get the image file from the web cam.
+
+3. Iterate through all the files and compare the file.
+
+If not present then get the input from the microphone and then store 
+accordingly the file.
