@@ -6,8 +6,11 @@ import speech_recognition as s_r
 import cv2
 from gtts import gTTS
 import face_recognition
+import serial
 
-
+# Port connecting to arduino.
+ArduinoUnoSerial = serial.Serial('/dev/ttyACM0',9600)
+ArduinoUnoSerial.write('0')
 def speakOut(message, name):
     # Text to mp3 converter.
     if(name != "default"):
@@ -74,6 +77,8 @@ if __name__ == "__main__":
                             print(os.path.splitext(filename)[0])
                             speakOut("The person standing in front is", os.path.splitext(filename)[0])
                             flag = 1
+                            ArduinoUnoSerial.write('1')
+                            time.sleep(2)
                             break
                     except:
                         break
@@ -93,6 +98,7 @@ if __name__ == "__main__":
             break
 
     # When everything done, release the capture
+    ArduinoUnoSerial.write('0')
     cap.release()
     cv2.destroyAllWindows()
 
